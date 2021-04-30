@@ -2,7 +2,7 @@ var cityList = [];
 var cityname;
 let APIKey = "fcfffdc78caadbeba241917135e27cb7";
 
-// $(document).ready(function () {});
+$(document).ready(function () {});
 
 // getHistory();
 
