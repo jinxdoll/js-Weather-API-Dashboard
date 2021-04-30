@@ -4,6 +4,51 @@ let APIKey = "fcfffdc78caadbeba241917135e27cb7";
 
 $(document).ready(function () {});
 
+
+function renderCities(){
+ 
+  $("#cityInput").val("");
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // getHistory();
 
 // function showHistory() {
