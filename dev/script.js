@@ -20,6 +20,13 @@ renderCities();
 }
 
 
+function setCityArray() {
+  localStorage.setItem("cities", JSON.stringify(cityList));
+  }
+
+  function setCurrentCity() {
+    localStorage.setItem("currentCity", JSON.stringify(cityName));
+}
 
 function initCityList() {
   var storedCityName = JSON(localStorage.getItem("cities"));
