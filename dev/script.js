@@ -88,7 +88,57 @@ async function displayWeather() {
       console.log(response);
 
 
+      console.log(response);
+      // Most of the code below was written with the help of my tutor Coby Sher. i want to give him credit:)*******
 
+      let currentWeatherDiv = $("<div class='card-body' id='currentWeather'>");
+      let getCurrentCity = response.name;
+      let date = new Date();
+      let val=(date.getMonth()+1)+"/"+date.getDate()+"/"+date.getFullYear();
+      let getCurrentWeatherIcon = response.weather[0].icon;
+      let displayCurrentWeatherIcon = $("<img src = http://openweathermap.org/img/wn/" + getCurrentWeatherIcon + "@2x.png />");
+      let currentCityEl = $("<h3 class = 'card-body'>").text(getCurrentCity+" ("+val+")");
+      currentCityEl.append(displayCurrentWeatherIcon);
+      currentWeatherDiv.append(currentCityEl);
+      let getTemp = response.main.temp.toFixed(1);
+      let tempEl = $("<p class='card-text'>").text("Temperature: "+getTemp+"° F");
+      currentWeatherDiv.append(tempEl);
+      let getHumidity = response.main.humidity;
+      let humidityEl = $("<p class='card-text'>").text("Humidity: "+getHumidity+"%");
+      currentWeatherDiv.append(humidityEl);
+      let getWindSpeed = response.wind.speed.toFixed(1);
+      let windSpeedEl = $("<p class='card-text'>").text("Wind Speed: "+getWindSpeed+" mph");
+      currentWeatherDiv.append(windSpeedEl);
+      let getLong = response.coord.lon;
+      let getLat = response.coord.lat;
+      
+      let uvURL = "https://api.openweathermap.org/data/2.5/uvi?" + "&appid=" +
+      APIKey+getLat+"&lon="+getLong;
+      let uvResponse = await $.ajax({
+          url: uvURL,
+          method: "GET"
+      })
+
+      // getting UV Index info and setting color class according to value
+      let getUVIndex = uvResponse.value;
+      let uvNumber = $("<span>");
+      if (getUVIndex > 0 && getUVIndex <= 2.99){
+          uvNumber.addClass("low");
+      }else if(getUVIndex >= 3 && getUVIndex <= 5.99){
+          uvNumber.addClass("moderate");
+      }else if(getUVIndex >= 6 && getUVIndex <= 7.99){
+          uvNumber.addClass("high");
+      }else if(getUVIndex >= 8 && getUVIndex <= 10.99){
+          uvNumber.addClass("vhigh");
+      }else{
+          uvNumber.addClass("extreme");
+      } 
+      uvNumber.text(getUVIndex);
+      let uvIndexEl = $("<p class='card-text'>").text("UV Index: ");
+      uvNumber.appendTo(uvIndexEl);
+      currentWeatherDiv.append(uvIndexEl);
+      $("#weatherContainer").html(currentWeatherDiv);
+}
 
 
 
@@ -256,7 +306,7 @@ async function displayWeather() {
 
 
   
-    // for (var i = 4; i < response.length; i += 8) {
+    // for (let i = 4; i < response.length; i += 8) {
           
     //   let list = fiveList[i];
 
