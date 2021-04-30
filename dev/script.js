@@ -1,5 +1,6 @@
 var cityList = [];
-var cityname;
+var cityName;
+
 let APIKey = "fcfffdc78caadbeba241917135e27cb7";
 
 $(document).ready(function () {});
@@ -14,15 +15,32 @@ function renderCities(){
     renderCity.attr("data-name", cityList[i]);
     renderCity.text(cityList[i]);
     $("#cityList").prepend(renderCity);
-} 
+}
+renderCities(); 
 }
 
 
 
+function initCityList() {
+  var storedCityName = JSON(localStorage.getItem("cities"));
+  
+  if (storedCityName !== null) {
+      cityList = storedCityName;
+  }
+  
+  renderCities();
+  }
 
 
+  function initWeather() {
+    var storedWeather = JSON.parse(localStorage.getItem("currentCity"));
 
+    if (storedWeather !== null) {
+        cityName = storedWeather;
 
+   
+    }
+}
 
 
 
