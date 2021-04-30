@@ -6,8 +6,16 @@ $(document).ready(function () {});
 
 
 function renderCities(){
- 
+  $("#cityList").empty();
   $("#cityInput").val("");
+  for (i=0; i<cityList.length; i++){
+    var renderCity = $("<a>");
+    renderCity.addClass("list-group-item list-group-item-action list-group-item-primary city");
+    renderCity.attr("data-name", cityList[i]);
+    renderCity.text(cityList[i]);
+    $("#cityList").prepend(renderCity);
+} 
+}
 
 
 
