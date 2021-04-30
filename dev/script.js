@@ -76,10 +76,16 @@ $("#citySearchBtn").on("click", function(event){
 
 
 
+async function displayWeather() {
 
+  var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityname + "&appid=" +
+  APIKey;
 
-
-
+  var response = await $.ajax({
+      url: queryURL,
+      method: "GET"
+    })
+      console.log(response);
 
 
 
