@@ -6,6 +6,11 @@ let APIKey = "fcfffdc78caadbeba241917135e27cb7";
 $(document).ready(function () {});
 
 
+
+initCityList();
+initWeather();
+
+
 function renderCities(){
   $("#cityList").empty();
   $("#cityInput").val("");
@@ -36,6 +41,7 @@ function initCityList() {
   }
   
   renderCities();
+
   }
 
 
