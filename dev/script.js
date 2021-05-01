@@ -1,5 +1,5 @@
-var cityList = [];
-var cityName;
+let cityList = [];
+let cityName;
 
 let APIKey = "fcfffdc78caadbeba241917135e27cb7";
 
@@ -10,7 +10,7 @@ function renderCities(){
   $("#cityList").empty();
   $("#cityInput").val("");
   for (i=0; i<cityList.length; i++){
-    var renderCity = $("<a>");
+    let renderCity = $("<a>");
     renderCity.addClass("list-group-item list-group-item-action list-group-item-primary city");
     renderCity.attr("data-name", cityList[i]);
     renderCity.text(cityList[i]);
@@ -29,7 +29,7 @@ function setCityArray() {
 }
 
 function initCityList() {
-  var storedCityName = JSON(localStorage.getItem("cities"));
+  let storedCityName = JSON(localStorage.getItem("cities"));
   
   if (storedCityName !== null) {
       cityList = storedCityName;
@@ -40,7 +40,7 @@ function initCityList() {
 
 
   function initWeather() {
-    var storedWeather = JSON.parse(localStorage.getItem("currentCity"));
+    let storedWeather = JSON.parse(localStorage.getItem("currentCity"));
 
     if (storedWeather !== null) {
         cityName = storedWeather;
@@ -78,10 +78,10 @@ $("#citySearchBtn").on("click", function(event){
 
 async function displayWeather() {
 
-  var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityname + "&appid=" +
+  let queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityname + "&appid=" +
   APIKey;
 
-  var response = await $.ajax({
+  let response = await $.ajax({
       url: queryURL,
       method: "GET"
     })
@@ -140,7 +140,56 @@ async function displayWeather() {
       $("#weatherContainer").html(currentWeatherDiv);
 }
 
+async function displayFiveDayForecast() {
 
+  let queryURL = "https://api.openweathermap.org/data/2.5/forecast?q="+cityname+"&appid=" +
+  APIKey;
+
+  let response = await $.ajax({
+      url: queryURL,
+      method: "GET"
+    })
+    let forecastDiv = $("<div  id='fiveDayForecast'>");
+    let forecastHeader = $("<h5 class='card-header border-secondary'>").text("5 Day Forecast");
+    forecastDiv.append(forecastHeader);
+    let cardDeck = $("<div  class='card-deck'>");
+    forecastDiv.append(cardDeck);
+     // Most of the code below was written with the help of my tutor Coby Sher. i want to give him credit:)*******
+    console.log(response);
+    for (i=0; i<5;i++){
+        let forecastCard = $("<div class='card mb-3 mt-3'>");
+        let cardBody = $("<div class='card-body'>");
+        let date = new Date();
+        let val=(date.getMonth()+1)+"/"+(date.getDate()+i+1)+"/"+date.getFullYear();
+        let forecastDate = $("<h5 class='card-title'>").text(val);
+        
+      cardBody.append(forecastDate);
+      let getCurrentWeatherIcon = response.list[i].weather[0].icon;
+      console.log(getCurrentWeatherIcon);
+      let displayWeatherIcon = $("<img src = http://openweathermap.org/img/wn/" + getCurrentWeatherIcon + ".png />");
+      cardBody.append(displayWeatherIcon);
+      let getTemp = response.list[i].main.temp;
+      let tempEl = $("<p class='card-text'>").text("Temp: "+getTemp+"° F");
+      cardBody.append(tempEl);
+      let getHumidity = response.list[i].main.humidity;
+      let humidityEl = $("<p class='card-text'>").text("Humidity: "+getHumidity+"%");
+      cardBody.append(humidityEl);
+      forecastCard.append(cardBody);
+      cardDeck.append(forecastCard);
+    }
+    $("#forecastContainer").html(forecastDiv);
+  }
+
+// This function is used to pass the city in the history list to the displayWeather function
+function historyDisplayWeather(){
+  cityname = $(this).attr("data-name");
+  displayWeather();
+  displayFiveDayForecast();
+  console.log(cityname);
+  
+}
+
+$(document).on("click", ".city", historyDisplayWeather);
 
 
 
@@ -360,12 +409,9 @@ async function displayWeather() {
       //   "Temperature in Farenheit:" + tempF
       // );
 
-      console.log("Here is the 5day weather for:" + city.name);
-      console.log("Here is the 5day wind for:" + list.wind.speed);
-      console.log("Here is the 5day humidity for:" + list.main.humidity);
-      console.log("Here is the 5day tempF for:" + tempF);
-      console.log("Here is the 5day tempK for:" + list.main.temp);
-    }
-  });
-}
+      // console.log("Here is the 5day weather for:" + city.name);
+      // console.log("Here is the 5day wind for:" + list.wind.speed);
+      // console.log("Here is the 5day humidity for:" + list.main.humidity);
+      // console.log("Here is the 5day tempF for:" + tempF);
+      // console.log("Here is the 5day tempK for:" + list.main.temp);
 
