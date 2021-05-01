@@ -21,7 +21,7 @@ function renderCities(){
     renderCity.text(cityList[i]);
     $("#cityList").prepend(renderCity);
 }
-renderCities(); 
+
 }
 
 
