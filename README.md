@@ -37,11 +37,11 @@ Application enabled using the following sources:
 
 ## Deployment
 
-[Github Pages](https://github.com/jinxdoll/js-Weather-API-Dashboard)
+[Heroku](https://github.com/jinxdoll/js-Weather-API-Dashboard)
 
 ### Author
 
-- [Aimee Mattson](https://github.com/jinxdoll/aimeemattsonPortfolio)
+- [Aimee Mattson](https://github.com/jinxdoll/js-Weather-API-Dashboard)
 - [Portfolio](https://jinxdoll.github.io/aimeemattsonPortfolio/)
 - [LinkedIn](https://www.linkedin.com/in/aimee-mattson)
 
