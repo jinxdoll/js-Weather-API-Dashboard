@@ -34,7 +34,7 @@ function setCityArray() {
 }
 
 function initCityList() {
-  let storedCityName = JSON(localStorage.getItem("cities"));
+  let storedCityName = JSON.parse(localStorage.getItem("cities"));
   
   if (storedCityName !== null) {
       cityList = storedCityName;
