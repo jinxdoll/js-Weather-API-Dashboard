@@ -66,8 +66,8 @@ $("#citySearchBtn").on("click", function(event){
   }else{
   cityList.push(cityname);
   }
-  storeCurrentCity();
-  storeCityArray();
+  setCurrentCity();
+  setCityArray();
   renderCities();
   displayWeather();
   displayFiveDayForecast();
