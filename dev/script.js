@@ -51,6 +51,10 @@ function initCityList() {
     if (storedWeather !== null) {
         cityName = storedWeather;
 
+        
+        displayWeather();
+        displayFiveDayForecast();
+
    
     }
 }
